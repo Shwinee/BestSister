@@ -1,0 +1,59 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Merry Christmas!</title>
+  </head>
+  <script>
+  var sub = "memes";
+  var c = 0;
+  function clearmemes() {
+    for (var e = 0; e > 100; e++){
+      var elem = document.getElementById("IloveYou");
+      elem.parentElement.removeChild(elem);
+    }
+  }
+  function csub(wsub){
+    if (c === 1){
+      window.location.reload();
+    }
+    c++;
+    sub = wsub;
+    console.log(sub);
+    fetchMemes();
+  }
+    async function fetchMemes(){
+      fetch(`https://www.reddit.com/r/${sub}.json`)
+        .then(response => response.json())
+        .then(body => {
+          for (let index=0; index<body.data.children.length; index++){
+            let img = document.createElement('img');
+            let h4 = document.createElement('h4');
+            let hr = document.createElement('hr');
+
+            img.id = "IloveYou";
+            h4.id = "IloveYou";
+            hr.id = "IloveYou";
+
+            img.class = "IloveYou";
+            h4.class = "IloveYou";
+            hr.class = "IloveYou";
+
+            img.src = body.data.children[index].data.url_overridden_by_dest
+            h4.textContent = body.data.children[index].data.title
+            document.body.append(h4, img, hr);
+          }
+
+        })
+    }
+  </script>
+  <body>
+    Hello Katelin! This is just a simple site that lets you look at some memes. Hopefully I can make the end of 2020 a little better lol. Bye, Merry Christmas!<br>
+    (also sorry that it looks so bad im not good at that)<br>
+    <button onclick="csub(`2020Memes`);">2020 Memes</button><br>
+    <button onclick="csub(`memes`);">Normal Memes</button><br>
+    <button onclick="csub(`technicallythetruth`);">Technically The Truth</button> (my fav)<br>
+
+  </body>
+</html>
